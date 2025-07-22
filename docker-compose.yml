@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./
+    ports:
+      - "8080:8080"
+    container_name: entain-task-app
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: entain_db
+    depends_on:
+      - db
+    networks:
+        - entain_network
+    volumes:
+      - /home/projects/logs/backend/errors.log:/app/internal/logs/errors.log
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: entain_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - entain_network
+
+networks:
+  entain_network:
+    driver: bridge
+
+volumes:
+    pgdata:
+        driver: local
