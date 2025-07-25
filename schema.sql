@@ -17,9 +17,3 @@ CREATE TABLE transactions (
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
-
--- Seed the users table
-INSERT INTO users (id, balance, created_at, updated_at) VALUES
-(1, 0.00, NOW(), NOW()),
-(2, 10.00, NOW(), NOW()),
-(3, 0.00, NOW(), NOW());
