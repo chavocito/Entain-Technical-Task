@@ -62,6 +62,15 @@ func UserTransactionHandler(dbPool *pgxpool.Pool) http.HandlerFunc {
 		}
 		defer conn.Release()
 
+		q := db.New(conn.Conn())
+		// Idempotency check
+		_, err = q.GetTransaction(r.Context(), req.TransactionID)
+		if err == nil {
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte("Transaction already processed"))
+			return
+		}
+
 		txErr := db.ProcessUserTransactionTx(r.Context(), conn.Conn(), req.State, userID, amount, req.TransactionID, sourceType)
 		if txErr != nil {
 			if txErr.Error() == "insufficient balance" {
