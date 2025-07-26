@@ -30,9 +30,9 @@ func UserTransactionHandler(dbPool *pgxpool.Pool) http.HandlerFunc {
 		}
 
 		// Parse and validate source type from header
-		sourceType := r.Header.Get("X-Source-Type")
+		sourceType := r.Header.Get("Source-Type")
 		if !utility.IsHeaderValid(sourceType) {
-			http.Error(w, "Invalid or missing X-Source-Type header", http.StatusBadRequest)
+			http.Error(w, "Invalid or missing Source-Type header", http.StatusBadRequest)
 			return
 		}
 
