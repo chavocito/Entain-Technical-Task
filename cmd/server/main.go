@@ -13,7 +13,7 @@ import (
 func main() {
 	connectionPool, err := db.ConnectDB()
 	if err != nil {
-		log.Fatal("Cannot connect to databse")
+		log.Fatal(err)
 	}
 
 	r := mux.NewRouter()
