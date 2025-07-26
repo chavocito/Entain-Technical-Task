@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -38,9 +37,8 @@ func GetUserBalanceHandler(dbPool *pgxpool.Pool) http.HandlerFunc {
 			http.Error(w, "User not found", http.StatusNotFound)
 			return
 		}
-		fmt.Println("Requested user: ", user)
-		balanceStr := strconv.FormatFloat(utility.ConvertAmountToDecimalForDisplay(user.Balance), 'f', 2, 64)
 
+		balanceStr := strconv.FormatFloat(utility.ConvertAmountToDecimalForDisplay(user.Balance), 'f', 2, 64)
 		resp := struct {
 			UserID  uint64 `json:"userId"`
 			Balance string `json:"balance"`
