@@ -1,5 +1,5 @@
 -- Drop users table
-DROP TABLE users;
+DROP TABLE users CASCADE;
 
 -- Drop transactions table
 DROP TABLE transactions;

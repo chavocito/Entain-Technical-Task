@@ -7,8 +7,6 @@ package db
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const createTransaction = `-- name: CreateTransaction :one
@@ -18,11 +16,11 @@ RETURNING id, user_id, transaction_id, source_type, state, amount, created_at
 `
 
 type CreateTransactionParams struct {
-	UserID        int64          `json:"user_id"`
-	TransactionID string         `json:"transaction_id"`
-	SourceType    string         `json:"source_type"`
-	State         string         `json:"state"`
-	Amount        pgtype.Numeric `json:"amount"`
+	UserID        int64  `json:"user_id"`
+	TransactionID string `json:"transaction_id"`
+	SourceType    string `json:"source_type"`
+	State         string `json:"state"`
+	Amount        int64  `json:"amount"`
 }
 
 func (q *Queries) CreateTransaction(ctx context.Context, arg CreateTransactionParams) (Transaction, error) {

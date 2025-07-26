@@ -14,13 +14,13 @@ type Transaction struct {
 	TransactionID string           `json:"transaction_id"`
 	SourceType    string           `json:"source_type"`
 	State         string           `json:"state"`
-	Amount        pgtype.Numeric   `json:"amount"`
+	Amount        int64            `json:"amount"`
 	CreatedAt     pgtype.Timestamp `json:"created_at"`
 }
 
 type User struct {
 	ID        int64            `json:"id"`
-	Balance   pgtype.Numeric   `json:"balance"`
+	Balance   int64            `json:"balance"`
 	CreatedAt pgtype.Timestamp `json:"created_at"`
 	UpdatedAt pgtype.Timestamp `json:"updated_at"`
 }

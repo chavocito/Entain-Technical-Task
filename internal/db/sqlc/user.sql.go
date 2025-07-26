@@ -7,8 +7,6 @@ package db
 
 import (
 	"context"
-
-	"github.com/jackc/pgx/v5/pgtype"
 )
 
 const getUserById = `-- name: GetUserById :one
@@ -17,8 +15,8 @@ WHERE id = $1 LIMIT 1
 `
 
 type GetUserByIdRow struct {
-	ID      int64          `json:"id"`
-	Balance pgtype.Numeric `json:"balance"`
+	ID      int64 `json:"id"`
+	Balance int64 `json:"balance"`
 }
 
 func (q *Queries) GetUserById(ctx context.Context, id int64) (GetUserByIdRow, error) {
@@ -54,8 +52,8 @@ WHERE id = $1
 `
 
 type UpdateUserBalanceParams struct {
-	ID      int64          `json:"id"`
-	Balance pgtype.Numeric `json:"balance"`
+	ID      int64 `json:"id"`
+	Balance int64 `json:"balance"`
 }
 
 func (q *Queries) UpdateUserBalance(ctx context.Context, arg UpdateUserBalanceParams) error {
