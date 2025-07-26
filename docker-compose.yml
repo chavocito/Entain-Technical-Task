@@ -20,6 +20,7 @@ services:
       - /home/projects/logs/backend/errors.log:/app/internal/logs/errors.log
 
   db:
+    container_name: entain-task-db
     image: postgres
     restart: always
     ports:
